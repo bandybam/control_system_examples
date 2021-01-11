@@ -12,9 +12,17 @@ def driveXDistance(setpoint,duration):
     # loop while the timer is less than the duration input of the function.
     while(brain.timer_time(SECONDS)<duration):
         # Your code goes here!
-        
-
-
+        error = xCoordinate - location.position(X,MM)
+        k = 1.5
+         drivespeed = error*k
+        if(drivespeed>maxvel):
+            drivespeed = maxvel
+        elif(drivespeed<-maxvel):
+            drivespeed = -maxvel
+        drivetrain.set_drive_velocity(drivespeed, PERCENT)
+        brain.print(drivespeed)
+        brain.new_line()
+        drivetrain.drive(FORWARD)
 
 
 
